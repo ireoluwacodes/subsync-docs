@@ -2,17 +2,22 @@
 title: Welcome to subsync
 hidden: false
 ---
-<Callout icon="📘" theme="info">
-  **Template:**  Delete this callout and edit this page with your content and links.
+<Callout icon="💳" theme="info">
+  SubSync is a subscription billing API for Nomba-powered merchants. You bring your own Nomba credentials; SubSync orchestrates plans, customers, checkout, renewals, and webhooks on your behalf. Integrate server-to-server with an API key (`ssk_...`).
 </Callout>
 
 <Cards>
-  {/* Edit the props below to customize these components */}
-  <Card title="Quick Start" href="#" icon="fa-duotone fa-rocket-launch">Learn how to get started with our product</Card>
+  <Card title="Quick Start" href="/quickstart" icon="fa-duotone fa-rocket-launch">
+    Register a tenant, connect Nomba, and run your first subscription checkout in under 10 minutes
+  </Card>
 
-  <Card title="API Reference" href="#" icon="fa-duotone fa-code-simple">Explore endpoints and build your integration</Card>
+  <Card title="API Reference" href="/api-reference" icon="fa-duotone fa-code-simple">
+    Integrator endpoints, request shapes, and the OpenAPI spec at `/openapi.json`
+  </Card>
 
-  <Card title="Build with AI" href="#" icon="fa-duotone fa-sparkles">Use LLM features to automate your workflow</Card>
+  <Card title="Build with AI" href="/build-with-ai" icon="fa-duotone fa-sparkles">
+    Point your LLM at OpenAPI or Postman — card-only checkout, webhooks, and renewal flows included
+  </Card>
 </Cards>
 
 <br />
@@ -20,11 +25,17 @@ hidden: false
 ## Recent Releases
 
 <Cards>
-  <Card isNew kind="tile" title="v2.0 Migration" href="#" icon="fa-duotone fa-magnifying-glass">Everything you need to upgrade</Card>
+  <Card isNew kind="tile" title="Subscription Checkout" href="/guides/subscription-checkout" icon="fa-duotone fa-cart-shopping">
+    Hosted Nomba checkout — card-only by default, optional bank transfer, trial support
+  </Card>
 
-  <Card kind="tile" title="Webhooks" href="#" icon="fa-duotone fa-bullhorn">Real-time events are now available</Card>
+  <Card isNew kind="tile" title="Card Capture" href="/guides/card-capture" icon="fa-duotone fa-credit-card">
+    Transfer signups can save a card before renewal via capture-payment-method or portal
+  </Card>
 
-  <Card kind="tile" title="Android SDK" href="#" icon="fa-duotone fa-robot">Our native Android library is out of beta</Card>
+  <Card kind="tile" title="Outbound Webhooks" href="/guides/webhooks" icon="fa-duotone fa-bullhorn">
+    `subscription.updated`, `invoice.paid`, and more — signed deliveries to your endpoints
+  </Card>
 </Cards>
 
 <br />
@@ -32,17 +43,41 @@ hidden: false
 ## The Basics
 
 <Cards>
-  <Card kind="tile" title="Customize" href="#" icon="fa-duotone fa-brush">Style the widget to match your brand</Card>
+  <Card kind="tile" title="Authentication" href="/guides/authentication" icon="fa-duotone fa-key">
+    API keys for integrators (`ssk_...`) and JWT for the merchant dashboard
+  </Card>
 
-  <Card kind="tile" title="Integrations" href="#" icon="fa-duotone fa-arrow-down-left-and-arrow-up-right-to-center">Connect with third-party services</Card>
+  <Card kind="tile" title="Plans & Customers" href="/guides/plans-and-customers" icon="fa-duotone fa-users">
+    Create billing plans and map them to customers on your platform
+  </Card>
 
-  <Card kind="tile" title="CLI" href="#" icon="fa-duotone fa-terminal">Manage resources from your terminal</Card>
+  <Card kind="tile" title="Subscriptions" href="/guides/subscriptions" icon="fa-duotone fa-arrows-rotate">
+    Checkout, direct create, pause, cancel, upgrade, and lifecycle states
+  </Card>
 
-  <Card kind="tile" title="Security" href="" icon="fa-duotone fa-shield-dog">Learn how we secure your data</Card>
+  <Card kind="tile" title="Nomba Integration" href="/guides/nomba" icon="fa-duotone fa-plug">
+    Per-merchant credentials, inbound webhooks, and sandbox live-billing checklist
+  </Card>
 
-  <Card kind="tile" title="Common Issues" href="" icon="fa-duotone fa-file-circle-info">Troubleshoot common issues</Card>
+  <Card kind="tile" title="Customer Portal" href="/guides/customer-portal" icon="fa-duotone fa-door-open">
+    Issue portal tokens so customers can cancel or update their payment method
+  </Card>
 
-  <Card kind="tile" title="Sync" href="#" icon="fa-duotone fa-code-compare">Connect to a storage provider</Card>
+  <Card kind="tile" title="Invoices & Dunning" href="/guides/invoices" icon="fa-duotone fa-file-invoice-dollar">
+    Invoice lifecycle, PDFs, retry charges, and automated dunning steps
+  </Card>
+
+  <Card kind="tile" title="Security" href="/guides/security" icon="fa-duotone fa-shield-dog">
+    Encrypted Nomba secrets, webhook signature verification, and HTTPS requirements
+  </Card>
+
+  <Card kind="tile" title="Common Issues" href="/guides/troubleshooting" icon="fa-duotone fa-file-circle-info">
+    Webhook mismatches, incomplete checkouts, transfer renewals, and worker not running
+  </Card>
+
+  <Card kind="tile" title="Response Format" href="/guides/conventions" icon="fa-duotone fa-brackets-curly">
+    Envelope shape, error codes, money in kobo, and pagination
+  </Card>
 </Cards>
 
 <br />
