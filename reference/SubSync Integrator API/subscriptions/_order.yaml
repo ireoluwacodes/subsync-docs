@@ -1,0 +1,12 @@
+- post_subscriptions-checkout
+- get_subscriptions
+- post_subscriptions
+- get_subscriptions-id
+- post_subscriptions-id-checkout
+- post_subscriptions-id-capture-payment-method
+- post_subscriptions-id-cancel
+- post_subscriptions-id-pause
+- post_subscriptions-id-resume
+- post_subscriptions-id-upgrade
+- get_subscriptions-id-upgrade-preview
+- get_subscriptions-id-transitions

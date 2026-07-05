@@ -1,0 +1,4 @@
+- post_payment-methods
+- get_payment-methods-id
+- delete_payment-methods-id
+- post_payment-methods-id-set-default

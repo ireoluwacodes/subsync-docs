@@ -1,0 +1,4 @@
+---
+title: Invoices
+hidden: false
+---

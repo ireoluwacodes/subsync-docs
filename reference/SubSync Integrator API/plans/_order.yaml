@@ -1,0 +1,6 @@
+- get_plans
+- post_plans
+- get_plans-id
+- put_plans-id
+- delete_plans-id
+- get_plans-id-stats

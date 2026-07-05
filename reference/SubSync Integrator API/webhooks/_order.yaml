@@ -1,0 +1,6 @@
+- get_webhook-endpoints
+- post_webhook-endpoints
+- get_webhook-endpoints-id
+- put_webhook-endpoints-id
+- delete_webhook-endpoints-id
+- get_webhook-endpoints-id-deliveries

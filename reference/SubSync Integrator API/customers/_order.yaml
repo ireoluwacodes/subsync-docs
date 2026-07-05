@@ -1,0 +1,6 @@
+- get_customers
+- post_customers
+- get_customers-id
+- put_customers-id
+- get_customers-id-subscriptions
+- get_customers-id-invoices
