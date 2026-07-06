@@ -97,6 +97,6 @@ Failed deliveries (non-2xx, timeout) are retried automatically. Check delivery l
 
 ## Related
 
-- [Quick Start](/quickstart) — step 7
-- [Security](/guides/security)
-- [Nomba integration](/guides/nomba) — inbound vs outbound webhooks
+- [Quick Start](/docs/quick-start) — step 7
+- [Security](/docs/security)
+- [Nomba integration](/docs/nomba) — inbound vs outbound webhooks

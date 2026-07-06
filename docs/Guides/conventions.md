@@ -127,6 +127,6 @@ Resource IDs are UUID v4 strings. Pass them in path and body exactly as returned
 
 ## Related
 
-- [API Reference](/api-reference)
-- [Authentication](/guides/authentication)
+- [API Reference](/docs/api-reference)
+- [Authentication](/docs/authentication)
 - [Build with AI](/build-with-ai)

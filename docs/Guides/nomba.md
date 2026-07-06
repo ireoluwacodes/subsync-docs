@@ -75,14 +75,14 @@ Nomba `order.allowedPaymentMethods`:
 | `allow_bank_transfer: true` | Card + Transfer |
 | `allowed_payment_methods: ["Card","Transfer"]` | Explicit list |
 
-See [Subscription checkout](/guides/subscription-checkout).
+See [Subscription checkout](/docs/subscription-checkout).
 
 ## Sandbox checklist
 
 1. Use **Nomba sandbox** credentials in SubSync **Settings → Nomba**
 2. Register the inbound webhook URL from **Settings → Nomba** in the Nomba dashboard
 3. Save Nomba's webhook signing secret in SubSync settings
-4. Ensure customers have a saved card before renewal (checkout or [card capture](/guides/card-capture))
+4. Ensure customers have a saved card before renewal (checkout or [card capture](/docs/card-capture))
 
 ## Rate limits
 
@@ -95,10 +95,10 @@ Nomba: **40 requests per 1-second window**. Back off on HTTP 429.
 | Nomba → SubSync | `{[base_url]}/webhooks/nomba/{tenant_id}` | Payment results, tokenization |
 | SubSync → your app | Your registered URL | Unlock access, sync CRM |
 
-Do not confuse the two. See [Outbound webhooks](/guides/webhooks).
+Do not confuse the two. See [Outbound webhooks](/docs/webhooks).
 
 ## Related
 
-- [Quick Start](/quickstart)
-- [Security](/guides/security)
-- [Troubleshooting](/guides/troubleshooting)
+- [Quick Start](/docs/quick-start)
+- [Security](/docs/security)
+- [Troubleshooting](/docs/troubleshooting)

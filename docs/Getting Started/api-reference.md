@@ -125,8 +125,8 @@ These require JWT (browser dashboard) and are **not** in `{[base_url]}/openapi.j
 | Settings | `/settings/*` |
 | Analytics | `/analytics/mrr`, `/analytics/churn`, `/analytics/dunning`, `/analytics/revenue` |
 
-See [Authentication](/guides/authentication) and [Analytics](/guides/analytics).
+See [Authentication](/docs/authentication) and [Analytics](/docs/analytics).
 
 ## Response format
 
-All routes return the standard envelope. See [Conventions](/guides/conventions).
+All routes return the standard envelope. See [Conventions](/docs/conventions).

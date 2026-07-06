@@ -98,7 +98,7 @@ After payment, Nomba notifies SubSync. The subscription moves out of `incomplete
 | No trial | `active`, first invoice `paid` |
 | With trial | `trialing`, ₦100 card verification |
 
-Poll `GET {[base_url]}/api/v1/subscriptions/:id` or listen for [outbound webhooks](/guides/webhooks) on your app.
+Poll `GET {[base_url]}/api/v1/subscriptions/:id` or listen for [outbound webhooks](/docs/webhooks) on your app.
 
 ## 7. Unlock access on your platform
 
@@ -127,6 +127,6 @@ When `subscription.updated` arrives with `state: active`, grant the user access 
 
 ## Next steps
 
-- [Subscription checkout](/guides/subscription-checkout) — payment methods, trials, resume flow
-- [Nomba integration](/guides/nomba) — sandbox checklist
-- [Outbound webhooks](/guides/webhooks) — verify signatures on your server
+- [Subscription checkout](/docs/subscription-checkout) — payment methods, trials, resume flow
+- [Nomba integration](/docs/nomba) — sandbox checklist
+- [Outbound webhooks](/docs/webhooks) — verify signatures on your server

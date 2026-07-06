@@ -101,5 +101,5 @@ const naira = (amountKobo) => (amountKobo / 100).toLocaleString('en-NG', {
 
 ## Related
 
-- [Subscription checkout](/guides/subscription-checkout)
-- [Conventions](/guides/conventions) — money format
+- [Subscription checkout](/docs/subscription-checkout)
+- [Conventions](/docs/conventions) — money format

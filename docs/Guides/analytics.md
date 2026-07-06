@@ -80,9 +80,9 @@ GET {[base_url]}/api/v1/analytics/revenue?from=2026-01-01&to=2026-01-31&currency
 
 ## Not for integrator OpenAPI
 
-These routes power the merchant dashboard. Server-to-server integrators typically use [outbound webhooks](/guides/webhooks) for access control rather than polling analytics.
+These routes power the merchant dashboard. Server-to-server integrators typically use [outbound webhooks](/docs/webhooks) for access control rather than polling analytics.
 
 ## Related
 
-- [Invoices](/guides/invoices)
-- [API Reference](/api-reference)
+- [Invoices](/docs/invoices)
+- [API Reference](/docs/api-reference)

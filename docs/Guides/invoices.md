@@ -75,11 +75,16 @@ PATCH {[base_url]}/api/v1/settings/dunning
 {
   "steps": [
     { "delay_days": 1, "action": "retry" },
-    { "delay_days": 3, "action": "retry" },
-    { "delay_days": 7, "action": "retry" }
+    { "delay_days": 3, "action": "retry_and_notify" },
+    { "delay_days": 7, "action": "mandate_fallback" },
+    { "delay_days": 14, "action": "cancel" }
   ]
 }
 ```
+
+The `mandate_fallback` step debits a **ready direct debit mandate** linked to the customer (`fallback_payment_method_id`), even when the subscription's primary payment method is a card.
+
+Customers set up mandates from the [customer portal](/docs/customer-portal) — not via integrator APIs.
 
 ### Processing invoices
 
@@ -87,7 +92,7 @@ Nomba charges may return async (`processing`). SubSync reconciles with Nomba per
 
 ## Transfer signups without card
 
-Transfer customers do **not** get a renewal invoice if no card is saved — subscription is **canceled** on billing date instead of going `past_due`. See [Card capture](/guides/card-capture).
+Transfer customers do **not** get a renewal invoice if no card is saved — subscription is **canceled** on billing date instead of going `past_due`. See [Card capture](/docs/card-capture).
 
 ## Dashboard vs API
 
@@ -107,6 +112,6 @@ Listen for:
 
 ## Related
 
-- [Subscriptions](/guides/subscriptions)
-- [Analytics](/guides/analytics) — revenue metrics
-- [Nomba integration](/guides/nomba)
+- [Subscriptions](/docs/subscriptions)
+- [Analytics](/docs/analytics) — revenue metrics
+- [Nomba integration](/docs/nomba)

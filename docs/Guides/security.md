@@ -71,6 +71,6 @@ Production webhook URLs must use HTTPS. SubSync signs every delivery — verify 
 
 ## Related
 
-- [Authentication](/guides/authentication)
-- [Nomba integration](/guides/nomba)
-- [Outbound webhooks](/guides/webhooks)
+- [Authentication](/docs/authentication)
+- [Nomba integration](/docs/nomba)
+- [Outbound webhooks](/docs/webhooks)

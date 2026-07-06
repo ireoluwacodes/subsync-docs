@@ -97,6 +97,6 @@ Returns `id`, `tenant_id`, `email`, `name`.
 
 ## Related
 
-- [Quick Start](/quickstart)
-- [Security](/guides/security)
-- [API Reference](/api-reference)
+- [Quick Start](/docs/quick-start)
+- [Security](/docs/security)
+- [API Reference](/docs/api-reference)

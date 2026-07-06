@@ -13,12 +13,12 @@ When a customer pays their first subscription period via **bank transfer**, SubS
 
 Transfer checkout (`allow_bank_transfer: true`) collects the first payment without a `tokenKey`. The subscription is `active` with `payment_method_id: null` and `metadata.awaiting_payment_method: true`.
 
-Without a card:
+Without a chargeable payment method (card or ready direct debit mandate):
 
 - SubSync sends reminder emails at **7, 3, and 1 day(s)** before renewal
-- On the billing date, the subscription is **canceled** (not charged, not `past_due`)
+- On the billing date, the subscription is **canceled** (not charged, not `past_due`) unless a mandate is pending validation
 
-Customers must add a card before renewal.
+Customers can add a **card** or set up **direct debit** from the [customer portal](/docs/customer-portal) before renewal.
 
 ## Capture endpoint
 
@@ -80,7 +80,7 @@ POST {[base_url]}/api/v1/portal/token
 { "subscription_id": "<uuid>", "expires_in_hours": 72 }
 ```
 
-The portal lets customers update their payment method via Nomba checkout. See [Customer portal](/guides/customer-portal).
+The portal lets customers update their payment method via Nomba checkout. See [Customer portal](/docs/customer-portal).
 
 ## Email reminders
 
@@ -103,6 +103,6 @@ Transfer checkout completes → subscription active, no card
 
 ## Related
 
-- [Subscription checkout](/guides/subscription-checkout)
-- [Customer portal](/guides/customer-portal)
-- [Troubleshooting](/guides/troubleshooting)
+- [Subscription checkout](/docs/subscription-checkout)
+- [Customer portal](/docs/customer-portal)
+- [Troubleshooting](/docs/troubleshooting)

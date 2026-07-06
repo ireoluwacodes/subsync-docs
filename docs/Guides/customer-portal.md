@@ -7,7 +7,7 @@ metadata:
 ---
 # Customer Portal
 
-Tokenized self-service links let customers cancel or update their payment method without logging into your app or the SubSync dashboard.
+Tokenized self-service links let customers manage billing without logging into your app or the SubSync dashboard. The portal is **hosted HTML** served by SubSync at `{[base_url]}/portal/{token}`.
 
 ## Issue a portal token (merchant API)
 
@@ -23,57 +23,62 @@ Authorization: Bearer ssk_... or JWT
 }
 ```
 
-**Response:** portal URL or token (implementation returns a token used in public routes).
-
-Build the link:
+**Response:** portal URL or token.
 
 ```
 {[base_url]}/portal/{token}
 ```
 
-Email it to the customer or show a "Manage billing" button in your app.
+Post-checkout emails include this link automatically. Customers can optionally set up **direct debit** as a renewal fallback or **add a card** for automatic billing.
 
-## Public portal routes
+## Public portal pages
 
 No SubSync auth — the token is the credential.
 
 | Method | Path | Action |
 |--------|------|--------|
-| `GET` | `{[base_url]}/portal/:token` | View subscription summary |
+| `GET` | `{[base_url]}/portal/:token` | HTML billing home — plan, status, actions |
+| `GET` | `{[base_url]}/portal/:token/add-card` | Redirect to Nomba card checkout (₦100 verification) |
+| `GET` | `{[base_url]}/portal/:token/direct-debit` | Direct debit setup form |
+| `POST` | `{[base_url]}/portal/:token/direct-debit` | Submit bank details → create mandate |
+| `GET` | `{[base_url]}/portal/:token/direct-debit/pending` | NIBSS validation instructions (auto-refresh) |
 | `POST` | `{[base_url]}/portal/:token/cancel` | Cancel subscription |
-| `POST` | `{[base_url]}/portal/:token/update-payment-method` | Returns Nomba checkout URL (card-only) |
+| `POST` | `{[base_url]}/portal/:token/update-payment-method` | JSON API — returns Nomba checkout URL |
 
-## Update payment method
+Send `Accept: application/json` on `GET /portal/:token` for the JSON summary (merchant tooling).
 
-`POST {[base_url]}/portal/:token/update-payment-method` returns a Nomba hosted checkout URL. Customer completes ₦100 card verification. Webhook saves `tokenKey` to their subscription.
+## Dual payment method model
 
-Use this when:
+| Method | Stored on | Used for |
+|--------|-----------|----------|
+| Card | `subscription.payment_method_id` | Primary renewal charges |
+| Direct debit mandate | `subscription.fallback_payment_method_id` | Dunning fallback + renewal when no card |
 
-- Renewal failed and customer needs a new card
-- Transfer signup needs a card before billing date
-- Customer wants to replace an expired card
+Card and mandate coexist. Adding a card does not remove a mandate fallback.
 
-Same outcome as [Card capture](/guides/card-capture) API, but customer-initiated via link.
+Direct debit mandates become chargeable only after Nomba reports `Active` + `Advice sent` (customer completes NIBSS validation).
 
-## Cancel via portal
+## When customers use the portal
 
-Customer can cancel at period end or immediately depending on portal implementation and subscription state. Your app should still listen for `subscription.canceled` webhooks to revoke access.
+- **Transfer signup** — add card or set up direct debit before renewal
+- **Optional fallback** — card subscribers can add direct debit as backup
+- **Past due** — update card or check mandate status
+- **Cancel** — self-service cancellation
 
 ## Dashboard pattern
 
 On subscription detail page:
 
-1. **Send portal link** button → `POST {[base_url]}/api/v1/portal/token` → email or copy link
-2. Same UX as "Resend checkout link" for incomplete subscriptions
+1. **Send portal link** → `POST {[base_url]}/api/v1/portal/token` → email or copy link
+2. Customer opens link in browser — no separate frontend required
 
 ## Security notes
 
 - Tokens expire (`expires_in_hours`)
-- Treat portal URLs like password reset links — single-purpose, time-limited
-- Portal links use HTTPS
+- Treat portal URLs like password reset links — time-limited, HTTPS only
 
 ## Related
 
-- [Card capture](/guides/card-capture)
-- [Subscriptions](/guides/subscriptions)
-- [Security](/guides/security)
+- [Card capture](/docs/card-capture)
+- [Invoices & dunning](/docs/invoices)
+- [Subscriptions](/docs/subscriptions)

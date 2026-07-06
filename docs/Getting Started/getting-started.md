@@ -3,8 +3,6 @@ title: Welcome to Subsync
 hidden: false
 ---
 <Callout icon="💳" theme="info">
-  ###
-
   SubSync is a subscription billing API for Nomba-powered merchants. You bring your own Nomba credentials; SubSync orchestrates plans, customers, checkout, renewals, and webhooks on your behalf. Integrate server-to-server with an API key (`ssk_...`).
 </Callout>
 
@@ -90,9 +88,9 @@ hidden: false
 
 ## Base URLs
 
-|         | URL                         |
-| ------- | --------------------------- |
-| API     | `{[base_url]}/api/v1`       |
+| | URL |
+|---|-----|
+| API | `{[base_url]}/api/v1` |
 | OpenAPI | `{[base_url]}/openapi.json` |
 
 Nomba inbound webhooks (configure in Nomba dashboard):

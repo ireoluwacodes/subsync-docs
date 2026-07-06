@@ -31,7 +31,7 @@ It **excludes** dashboard auth, settings, and analytics.
 
    > "When a user clicks Subscribe on my SaaS, create a SubSync customer if needed, start checkout, redirect to checkout_url, and unlock access when subscription.updated webhook fires with state active."
 
-4. **Cross-check** generated code against [Quick Start](/quickstart) and [Subscription checkout](/guides/subscription-checkout).
+4. **Cross-check** generated code against [Quick Start](/docs/quick-start) and [Subscription checkout](/docs/subscription-checkout).
 
 ## Example prompts
 
@@ -94,6 +94,6 @@ The collection includes **Start Checkout**, **Start Checkout (with bank transfer
 
 ## Related docs
 
-- [API Reference](/api-reference)
-- [Conventions](/guides/conventions)
-- [Troubleshooting](/guides/troubleshooting)
+- [API Reference](/docs/api-reference)
+- [Conventions](/docs/conventions)
+- [Troubleshooting](/docs/troubleshooting)

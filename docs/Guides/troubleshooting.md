@@ -93,6 +93,6 @@ Contact SubSync support with the above.
 
 ## Related
 
-- [Nomba integration](/guides/nomba)
-- [Quick Start](/quickstart)
-- [Card capture](/guides/card-capture)
+- [Nomba integration](/docs/nomba)
+- [Quick Start](/docs/quick-start)
+- [Card capture](/docs/card-capture)

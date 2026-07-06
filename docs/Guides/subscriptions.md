@@ -27,7 +27,7 @@ Subscriptions connect a customer to a plan and drive billing cycles, renewals, a
 POST {[base_url]}/api/v1/subscriptions/checkout
 ```
 
-See [Subscription checkout](/guides/subscription-checkout).
+See [Subscription checkout](/docs/subscription-checkout).
 
 ## Direct create (card already tokenized)
 
@@ -127,6 +127,6 @@ SubSync charges at `next_billing_at`. No API call needed for normal renewals. Fa
 
 ## Related
 
-- [Subscription checkout](/guides/subscription-checkout)
-- [Card capture](/guides/card-capture)
-- [Invoices & dunning](/guides/invoices)
+- [Subscription checkout](/docs/subscription-checkout)
+- [Card capture](/docs/card-capture)
+- [Invoices & dunning](/docs/invoices)

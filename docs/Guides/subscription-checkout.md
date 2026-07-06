@@ -86,7 +86,7 @@ Same body as start checkout. Subscription must still be `incomplete`. Returns `4
 
 **Card (default):** Nomba returns `tokenKey` in the webhook. SubSync attaches a payment method and renewals run automatically.
 
-**Transfer (`allow_bank_transfer: true`):** First period paid via bank transfer. Subscription activates **without** a saved card. See [Card capture](/guides/card-capture) for renewal requirements.
+**Transfer (`allow_bank_transfer: true`):** First period paid via bank transfer. Subscription activates **without** a saved card. See [Card capture](/docs/card-capture) for renewal requirements.
 
 ## Integrator pattern
 
@@ -114,7 +114,7 @@ return redirect(data.checkout_url);
 
 ## Unlock access
 
-Do not poll forever. Register [outbound webhooks](/guides/webhooks) for `subscription.updated` and `invoice.paid`, or poll `GET {[base_url]}/api/v1/subscriptions/:id` until `state !== incomplete`.
+Do not poll forever. Register [outbound webhooks](/docs/webhooks) for `subscription.updated` and `invoice.paid`, or poll `GET {[base_url]}/api/v1/subscriptions/:id` until `state !== incomplete`.
 
 ## Errors
 
@@ -126,6 +126,6 @@ Do not poll forever. Register [outbound webhooks](/guides/webhooks) for `subscri
 
 ## Related
 
-- [Quick Start](/quickstart)
-- [Card capture](/guides/card-capture)
-- [Nomba integration](/guides/nomba)
+- [Quick Start](/docs/quick-start)
+- [Card capture](/docs/card-capture)
+- [Nomba integration](/docs/nomba)
