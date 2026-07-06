@@ -1,0 +1,102 @@
+---
+title: Authentication
+deprecated: false
+hidden: false
+metadata:
+  robots: index
+---
+# Authentication
+
+SubSync accepts two credential types on protected `{[base_url]}/api/v1/*` routes.
+
+## API key (integrators)
+
+```
+Authorization: Bearer ssk_xxxxxxxx
+```
+
+- Issued **once** when you complete dashboard signup (also available via **Settings → API key** rotation)
+- Prefix is always `ssk_`
+- Use for server-to-server calls from your backend — **not** for end users
+- Rotate in the dashboard or via `POST {[base_url]}/api/v1/settings/api-key/rotate` (returns new key once)
+
+<Callout icon="🔑" theme="info">
+  The OpenAPI spec at `{[base_url]}/openapi.json` documents API-key routes only. If you are building an integration, start here.
+</Callout>
+
+## JWT (merchant dashboard)
+
+```
+Authorization: Bearer eyJhbG...
+```
+
+- Issued on register/login
+- Short-lived access token + httpOnly refresh cookie
+- Use for browser-based dashboard apps
+
+### Browser session flow
+
+1. `POST {[base_url]}/api/v1/auth/register` or `POST {[base_url]}/api/v1/auth/login`
+2. Store `access_token` in memory (or secure storage)
+3. Send `Authorization: Bearer <access_token>` on API calls
+4. Before expiry, `GET {[base_url]}/api/v1/auth/refresh` with `credentials: 'include'` (refresh cookie)
+5. `POST {[base_url]}/api/v1/auth/logout` clears the cookie
+
+Set `CORS_ALLOWED_ORIGINS` on the API to your dashboard origin so credentialed refresh works.
+
+## Register (dashboard)
+
+Merchants create accounts in the **SubSync dashboard** onboarding flow:
+
+- Email and password
+- Business name
+- Nomba credentials (`client_id`, `client_secret`, `account_id`, environment)
+
+After signup you receive an **API key** (`ssk_...`) once, plus the **Nomba inbound webhook URL** to paste into Nomba.
+
+`POST {[base_url]}/api/v1/auth/register` is used by the dashboard client — **do not call it from your product backend**. Integrate with the API key from your dashboard account.
+
+## Login (dashboard)
+
+`POST {[base_url]}/api/v1/auth/login`
+
+```json
+{ "email": "billing@acme.com", "password": "securepass123" }
+```
+
+**Response `200`:** same as register **without** `api_key`.
+
+## Password reset
+
+1. `POST {[base_url]}/api/v1/auth/forgot-password` — `{ "email" }`
+2. `POST {[base_url]}/api/v1/auth/confirm-password-otp` — `{ "email", "otp" }` → `reset_token`
+3. `POST {[base_url]}/api/v1/auth/reset-password` — `{ "token", "new_password" }`
+
+In development, `forgot-password` may return `otp` in the response when email is not configured.
+
+## Current user
+
+`GET {[base_url]}/api/v1/me` — JWT or API key
+
+Returns `id`, `tenant_id`, `email`, `name`.
+
+## Errors
+
+| HTTP | Code | Meaning |
+|------|------|---------|
+| 401 | `unauthorized` | Missing, expired, or invalid token |
+
+## Which token when?
+
+| Scenario | Token |
+|----------|-------|
+| Your SaaS backend calling SubSync | API key (`ssk_`) |
+| Merchant dashboard in browser | JWT + refresh cookie |
+| Postman / scripts | API key |
+| Customer-facing checkout redirect | No SubSync auth — Nomba hosted page |
+
+## Related
+
+- [Quick Start](/quickstart)
+- [Security](/guides/security)
+- [API Reference](/api-reference)
