@@ -9,7 +9,7 @@ hidden: false
 </Callout>
 
 <Cards>
-  <Card title="Quick Start" href="/docs/quickstart" icon="fa-duotone fa-rocket-launch">
+  <Card title="Quick Start" href="/docs/quick-start" icon="fa-duotone fa-rocket-launch">
     Sign up in the dashboard, connect Nomba, then run your first subscription checkout via API key
   </Card>
 
