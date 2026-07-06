@@ -1,5 +1,5 @@
 ---
-title: Welcome to subsync
+title: Welcome to Subsync
 hidden: false
 ---
 <Callout icon="💳" theme="info">
