@@ -1,0 +1,140 @@
+---
+title: Quick Start
+deprecated: false
+hidden: false
+metadata:
+  robots: index
+---
+# Quick Start
+
+Get from zero to a paid subscription in Nomba sandbox. You will sign up in the **SubSync dashboard**, connect your Nomba account, then call the **hosted SubSync API** from your backend with your API key.
+
+<Callout icon="☁️" theme="info">
+  SubSync is fully hosted. Renewals, dunning, and webhook delivery run on our infrastructure — you do not deploy or operate SubSync servers.
+</Callout>
+
+**API base URL:** `{[base_url]}/api/v1` (find yours in the dashboard; sandbox vs production charges depend on your Nomba environment setting).
+
+## 1. Create your SubSync account (dashboard)
+
+1. Sign up at the SubSync dashboard and complete onboarding.
+2. Enter your **Nomba sandbox credentials** (`client_id`, `client_secret`, `account_id`, environment).
+3. Copy and store your **API key** (`ssk_...`) — shown once at signup; rotate later under **Settings → API key** if needed.
+4. Open **Settings → Nomba** and copy your **inbound webhook URL** (for Nomba dashboard setup).
+
+Your API key is for server-to-server calls only. End users on your product never see it.
+
+<Callout icon="📋" theme="info">
+  You can create your first plan in the dashboard (**Plans → New plan**) before writing code. The steps below use the API so you can automate the same flow from your backend.
+</Callout>
+
+## 2. Connect Nomba webhooks (dashboard)
+
+1. In **Nomba → Settings → Webhooks**, register the URL shown in SubSync **Settings → Nomba**.
+2. Copy Nomba's webhook signing secret.
+3. Paste it into SubSync **Settings → Nomba → Webhook secret** and save.
+
+Nomba sends payment events to SubSync directly. You do not need to proxy or host this endpoint.
+
+## 3. Create a plan
+
+```http
+POST {[base_url]}/api/v1/plans
+Authorization: Bearer ssk_...
+```
+
+```json
+{
+  "name": "Pro",
+  "amount": 100000,
+  "currency": "NGN",
+  "interval": "monthly",
+  "trial_days": 0,
+  "features": []
+}
+```
+
+`amount` is in **kobo** (100000 = ₦1,000.00). Save the returned plan `id`.
+
+## 4. Create a customer
+
+```http
+POST {[base_url]}/api/v1/customers
+Authorization: Bearer ssk_...
+```
+
+```json
+{
+  "email": "user@example.com",
+  "name": "Jane Doe",
+  "external_id": "your-platform-user-id",
+  "metadata": {}
+}
+```
+
+Save the customer `id`. Use `external_id` to link the SubSync customer to your platform user.
+
+## 5. Start checkout
+
+```http
+POST {[base_url]}/api/v1/subscriptions/checkout
+Authorization: Bearer ssk_...
+```
+
+```json
+{
+  "customer_id": "<customer-uuid>",
+  "plan_id": "<plan-uuid>",
+  "success_url": "https://yourapp.com/billing/success",
+  "cancel_url": "https://yourapp.com/pricing",
+  "send_checkout_email": false
+}
+```
+
+**Response:** `checkout_url`, `subscription_id`, `status: incomplete`.
+
+Redirect the user to `checkout_url`. They complete payment on Nomba's hosted page (card-only by default).
+
+## 6. Wait for activation
+
+After payment, Nomba notifies SubSync. The subscription moves out of `incomplete`:
+
+| Plan type | Final state |
+|-----------|---------------|
+| No trial | `active`, first invoice `paid` |
+| With trial | `trialing`, ₦100 card verification |
+
+Poll `GET {[base_url]}/api/v1/subscriptions/:id` or listen for [outbound webhooks](/guides/webhooks) on your app.
+
+## 7. Unlock access on your platform
+
+Register where SubSync should notify your app:
+
+```http
+POST {[base_url]}/api/v1/webhook-endpoints
+Authorization: Bearer ssk_...
+```
+
+```json
+{
+  "url": "https://yourapp.com/webhooks/subsync",
+  "events": ["subscription.updated", "invoice.paid"],
+  "is_active": true
+}
+```
+
+When `subscription.updated` arrives with `state: active`, grant the user access in your product.
+
+## Test locally on your app
+
+You only need your own app running — not SubSync.
+
+- Use **Nomba sandbox** credentials in the SubSync dashboard during development.
+- Point `success_url` / `cancel_url` at `http://localhost:...` while testing your frontend (HTTPS required in production).
+- Expose your **outbound webhook** URL to the internet (e.g. ngrok) if you want real-time unlock during local dev.
+
+## Next steps
+
+- [Subscription checkout](/guides/subscription-checkout) — payment methods, trials, resume flow
+- [Nomba integration](/guides/nomba) — sandbox checklist
+- [Outbound webhooks](/guides/webhooks) — verify signatures on your server
