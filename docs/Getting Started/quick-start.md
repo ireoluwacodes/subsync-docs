@@ -7,11 +7,7 @@ metadata:
 ---
 # Quick Start
 
-Get from zero to a paid subscription in Nomba sandbox. You will sign up in the **SubSync dashboard**, connect your Nomba account, then call the **hosted SubSync API** from your backend with your API key.
-
-<Callout icon="☁️" theme="info">
-  SubSync is fully hosted. Renewals, dunning, and webhook delivery run on our infrastructure — you do not deploy or operate SubSync servers.
-</Callout>
+Get from zero to a paid subscription in Nomba sandbox. Sign up in the **SubSync dashboard**, connect your Nomba account, then call the SubSync API from your backend with your API key.
 
 **API base URL:** `{[base_url]}/api/v1` (find yours in the dashboard; sandbox vs production charges depend on your Nomba environment setting).
 
@@ -33,8 +29,6 @@ Your API key is for server-to-server calls only. End users on your product never
 1. In **Nomba → Settings → Webhooks**, register the URL shown in SubSync **Settings → Nomba**.
 2. Copy Nomba's webhook signing secret.
 3. Paste it into SubSync **Settings → Nomba → Webhook secret** and save.
-
-Nomba sends payment events to SubSync directly. You do not need to proxy or host this endpoint.
 
 ## 3. Create a plan
 
@@ -125,9 +119,7 @@ Authorization: Bearer ssk_...
 
 When `subscription.updated` arrives with `state: active`, grant the user access in your product.
 
-## Test locally on your app
-
-You only need your own app running — not SubSync.
+## Local development
 
 - Use **Nomba sandbox** credentials in the SubSync dashboard during development.
 - Point `success_url` / `cancel_url` at `http://localhost:...` while testing your frontend (HTTPS required in production).
