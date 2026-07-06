@@ -3,18 +3,16 @@ title: Welcome to subsync
 hidden: false
 ---
 <Callout icon="💳" theme="info">
-  ###
-
   SubSync is a subscription billing API for Nomba-powered merchants. You bring your own Nomba credentials; SubSync orchestrates plans, customers, checkout, renewals, and webhooks on your behalf. Integrate server-to-server with an API key (`ssk_...`).
 </Callout>
 
 <Cards>
-  <Card title="Quick Start" href="/quick-start" icon="fa-duotone fa-rocket-launch">
-    Register a tenant, connect Nomba, and run your first subscription checkout in under 10 minutes
+  <Card title="Quick Start" href="/quickstart" icon="fa-duotone fa-rocket-launch">
+    Sign up in the dashboard, connect Nomba, then run your first subscription checkout via API key
   </Card>
 
   <Card title="API Reference" href="/api-reference" icon="fa-duotone fa-code-simple">
-    Integrator endpoints, request shapes, and the OpenAPI spec at `/openapi.json`
+    Integrator endpoints, request shapes, and the OpenAPI spec at `{[base_url]}/openapi.json`
   </Card>
 
   <Card title="Build with AI" href="/build-with-ai" icon="fa-duotone fa-sparkles">
@@ -69,17 +67,36 @@ hidden: false
     Invoice lifecycle, PDFs, retry charges, and automated dunning steps
   </Card>
 
+  <Card kind="tile" title="Analytics" href="/guides/analytics" icon="fa-duotone fa-chart-line">
+    MRR, churn, dunning recovery, and revenue — dashboard metrics API
+  </Card>
+
   <Card kind="tile" title="Security" href="/guides/security" icon="fa-duotone fa-shield-dog">
     Encrypted Nomba secrets, webhook signature verification, and HTTPS requirements
   </Card>
 
   <Card kind="tile" title="Common Issues" href="/guides/troubleshooting" icon="fa-duotone fa-file-circle-info">
-    Webhook mismatches, incomplete checkouts, transfer renewals, and worker not running
+    Webhook mismatches, incomplete checkouts, transfer renewals, and missing outbound events
   </Card>
 
-  <Card kind="tile" title="Response Format" href="/guides/conventions" icon="fa-duotone fa-brackets-curly">
+  <Card kind="tile" title="Conventions" href="/guides/conventions" icon="fa-duotone fa-brackets-curly">
     Envelope shape, error codes, money in kobo, and pagination
   </Card>
 </Cards>
 
 <br />
+
+## Base URLs
+
+| | URL |
+|---|-----|
+| API | `{[base_url]}/api/v1` |
+| OpenAPI | `{[base_url]}/openapi.json` |
+
+Nomba inbound webhooks (configure in Nomba dashboard):
+
+```
+{[base_url]}/webhooks/nomba/{tenant_id}
+```
+
+Your tenant-specific URL is shown in **Settings → Nomba** in the dashboard.
