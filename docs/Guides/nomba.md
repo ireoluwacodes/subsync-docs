@@ -62,6 +62,21 @@ SubSync verifies `nomba-signature` and `nomba-timestamp` headers, deduplicates v
 | Recurring charge | `POST /v1/checkout/tokenized-card-payment` |
 | Verify checkout status | `GET /v1/checkout/verify` |
 | Bank transfer | `POST /v2/transfers/bank/{accountId}` |
+| List banks (transfers) | `GET /v1/transfers/banks` |
+| Create direct debit mandate | `POST /v1/direct-debits` |
+| Mandate status | `GET /v1/direct-debits/status?mandateId=...` |
+| Debit mandate | `POST /v1/direct-debits/debit-mandate` |
+
+Variable-frequency mandates omit `amount` on create. Mandate `startDate` is formatted in Nigeria local time (WAT).
+
+### Mandate readiness
+
+A mandate is **ready to debit** when:
+
+- `mandateStatus` = `Active`
+- `mandateAdviceStatus` = `ADVICE_SENT`
+
+`ADVICE_NOT_SENT` means validation payment succeeded but NIBSS advice to the bank is still pending (up to ~72 hours).
 
 Checkout orders use `tokenizeCard: true` so cards can be saved for renewals.
 

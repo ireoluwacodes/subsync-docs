@@ -56,7 +56,21 @@ Send `Accept: application/json` on `GET /portal/:token` for the JSON summary (me
 
 Card and mandate coexist. Adding a card does not remove a mandate fallback.
 
-Direct debit mandates become chargeable only after Nomba reports `Active` + `Advice sent` (customer completes NIBSS validation).
+Direct debit mandates become chargeable only after Nomba reports `mandateStatus: Active` and `mandateAdviceStatus: ADVICE_SENT` (customer completes NIBSS validation and the bank advice is sent).
+
+## Direct debit setup lifecycle
+
+| Phase | Nomba status | What the customer sees |
+|-------|--------------|------------------------|
+| **Validation** | Mandate created, awaiting ₦50 NIBSS transfer | Transfer instructions on `/direct-debit/pending` |
+| **Bank advice** | `Active` + `ADVICE_NOT_SENT` | “Confirming with your bank” — validation received, waiting on NIBSS advice (can take up to **72 hours**) |
+| **Ready** | `Active` + `ADVICE_SENT` | Mandate saved; used for dunning fallback and renewals when no card |
+
+SubSync polls Nomba every **15 minutes** via the background worker (`mandate:poll_status`). Customers also get a **direct debit ready** email when the mandate becomes chargeable.
+
+The portal bank dropdown lists **NIBSS-supported commercial banks** only (not every bank returned by Nomba's transfer bank list).
+
+Required form fields: account number, bank, customer name, account name, phone (Nigerian format), and address.
 
 ## When customers use the portal
 
