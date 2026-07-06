@@ -69,6 +69,8 @@ Amounts are in **minor units**:
 
 Display: `amount / 100`. Never send floats for money.
 
+Many responses include paired `*_display` strings (e.g. `amount_display`, `amount_due_display`, `mrr_estimate_display`) formatted for UI. Use minor-unit integers for billing logic; use `*_display` for presentation only.
+
 Trial checkout charges **₦100** (10000 kobo) for card verification, not the plan price.
 
 ## Dates and times

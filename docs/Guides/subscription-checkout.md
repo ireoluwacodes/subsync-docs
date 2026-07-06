@@ -33,7 +33,7 @@ Authorization: Bearer ssk_...
 |-------|----------|-------------|
 | `customer_id` | Yes | Existing SubSync customer |
 | `plan_id` | Yes | Plan to subscribe to |
-| `success_url` | Yes | Redirect after successful payment (HTTPS in production) |
+| `success_url` | No | Redirect after successful payment (HTTPS in production). When omitted, Nomba redirects to SubSync's hosted page at `{[base_url]}/billing/success` |
 | `cancel_url` | No | Redirect if user abandons checkout |
 | `send_checkout_email` | No | Email checkout link to the customer (when checkout email is enabled) |
 | `allow_bank_transfer` | No | When `true`, Nomba shows Card + Transfer. Default is **card only** |
@@ -87,6 +87,16 @@ Same body as start checkout. Subscription must still be `incomplete`. Returns `4
 **Card (default):** Nomba returns `tokenKey` in the webhook. SubSync attaches a payment method and renewals run automatically.
 
 **Transfer (`allow_bank_transfer: true`):** First period paid via bank transfer. Subscription activates **without** a saved card. See [Card capture](/docs/card-capture) for renewal requirements.
+
+## Hosted billing return page
+
+When you omit `success_url`, Nomba redirects customers to SubSync after checkout:
+
+```
+GET {[base_url]}/billing/success?orderReference=<uuid>&orderId=<nomba-order-id>
+```
+
+SubSync resolves payment status from the order reference, shows a branded HTML confirmation (success, pending, or failed), and links back to the customer portal when available. Pass your own `success_url` if you prefer to handle the return in your app.
 
 ## Integrator pattern
 

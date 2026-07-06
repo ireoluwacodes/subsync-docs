@@ -32,7 +32,7 @@ GET {[base_url]}/api/v1/invoices/:id
 GET {[base_url]}/api/v1/invoices/:id/pdf
 ```
 
-Returns PDF bytes (or redirect to Cloudinary URL when configured). Branding comes from tenant settings.
+Returns PDF bytes (or redirect to Cloudinary URL when configured). PDFs include tenant branding (name, support email, optional logo) and bill-to customer details from settings.
 
 ## Void
 

@@ -23,6 +23,10 @@ Import into Postman, Insomnia, or your API client. All documented routes expect:
 Authorization: Bearer ssk_...
 ```
 
+**Money:** integer amount fields are in minor units (kobo for `NGN`). Responses may include paired `*_display` strings for UI formatting.
+
+**Hosted routes** (not in OpenAPI): `GET /billing/success` (checkout return), `GET /portal/:token` and related portal pages — see [Subscription checkout](/docs/subscription-checkout) and [Customer portal](/docs/customer-portal).
+
 ## Health
 
 | Method | Path | Auth | Description |
