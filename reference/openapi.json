@@ -5,474 +5,936 @@
     "version": "1.0.0",
     "description": "Server-to-server API for Nomba-powered merchants. Authenticate with `Authorization: Bearer ssk_...` on all routes below. Dashboard-only routes (auth, settings, analytics, /me) are not listed here.\n\n## Money\n\nAll monetary integer fields (`amount`, `amount_due`, `amount_paid`, `mrr`, `mrr_estimate`, proration amounts, etc.) are in the currency's **minor unit** (kobo for `NGN`). Divide by 100 for major units. Example: `100000` with `NGN` is ₦1,000.00.\n\nResponses may include paired `*_display` strings (e.g. `amount_display`) formatted for UI. Use minor-unit integers for billing logic; use `*_display` for presentation only."
   },
-  "servers": [{ "url": "/api/v1" }],
+  "servers": [
+    {
+      "url": "https://subsync-api.ireoluwa.dev/api/v1"
+    }
+  ],
   "paths": {
     "/plans": {
       "get": {
         "summary": "List plans",
-        "tags": ["Plans"],
+        "tags": [
+          "Plans"
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       },
       "post": {
         "summary": "Create plan",
-        "tags": ["Plans"],
+        "tags": [
+          "Plans"
+        ],
         "responses": {
-          "201": { "$ref": "#/components/responses/Created" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       }
     },
     "/plans/{id}": {
       "get": {
         "summary": "Get plan",
-        "tags": ["Plans"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Plans"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       },
       "put": {
         "summary": "Update plan",
-        "tags": ["Plans"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Plans"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       },
       "delete": {
         "summary": "Archive plan",
-        "tags": ["Plans"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Plans"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/plans/{id}/stats": {
       "get": {
         "summary": "Active subscription count for plan",
-        "tags": ["Plans"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Plans"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/customers": {
       "get": {
         "summary": "List customers",
-        "tags": ["Customers"],
+        "tags": [
+          "Customers"
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       },
       "post": {
         "summary": "Create customer",
-        "tags": ["Customers"],
+        "tags": [
+          "Customers"
+        ],
         "responses": {
-          "201": { "$ref": "#/components/responses/Created" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       }
     },
     "/customers/{id}": {
       "get": {
         "summary": "Get customer",
-        "tags": ["Customers"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       },
       "put": {
         "summary": "Update customer",
-        "tags": ["Customers"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/customers/{id}/subscriptions": {
       "get": {
         "summary": "List customer subscriptions",
-        "tags": ["Customers"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/customers/{id}/invoices": {
       "get": {
         "summary": "List customer invoices",
-        "tags": ["Customers"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/payment-methods": {
       "post": {
         "summary": "Create payment method (Nomba token_key)",
-        "tags": ["Payment Methods"],
+        "tags": [
+          "Payment Methods"
+        ],
         "responses": {
-          "201": { "$ref": "#/components/responses/Created" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       }
     },
     "/payment-methods/{id}": {
       "get": {
         "summary": "Get payment method",
-        "tags": ["Payment Methods"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Payment Methods"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       },
       "delete": {
         "summary": "Delete payment method",
-        "tags": ["Payment Methods"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Payment Methods"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/payment-methods/{id}/set-default": {
       "post": {
         "summary": "Set default payment method for customer",
-        "tags": ["Payment Methods"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Payment Methods"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/checkout": {
       "post": {
         "summary": "Start subscription checkout (card-only by default)",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "responses": {
-          "201": { "$ref": "#/components/responses/Created" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "409": { "$ref": "#/components/responses/Conflict" }
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          }
         }
       }
     },
     "/subscriptions": {
       "get": {
         "summary": "List subscriptions",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       },
       "post": {
         "summary": "Create subscription (requires payment_method_id)",
-        "tags": ["Subscriptions"],
+        "tags": [
+          "Subscriptions"
+        ],
         "responses": {
-          "201": { "$ref": "#/components/responses/Created" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       }
     },
     "/subscriptions/{id}": {
       "get": {
         "summary": "Get subscription",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/{id}/checkout": {
       "post": {
         "summary": "Resume incomplete checkout",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/{id}/capture-payment-method": {
       "post": {
         "summary": "Start card capture checkout (after transfer signup)",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/{id}/cancel": {
       "post": {
         "summary": "Cancel subscription",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/{id}/pause": {
       "post": {
         "summary": "Pause subscription",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/{id}/resume": {
       "post": {
         "summary": "Resume paused subscription",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/{id}/upgrade": {
       "post": {
         "summary": "Upgrade subscription plan",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/{id}/upgrade/preview": {
       "get": {
         "summary": "Preview plan upgrade proration",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/subscriptions/{id}/transitions": {
       "get": {
         "summary": "List subscription state transitions",
-        "tags": ["Subscriptions"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Subscriptions"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/invoices": {
       "get": {
         "summary": "List invoices",
-        "tags": ["Invoices"],
+        "tags": [
+          "Invoices"
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       }
     },
     "/invoices/{id}": {
       "get": {
         "summary": "Get invoice",
-        "tags": ["Invoices"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/invoices/{id}/pdf": {
       "get": {
         "summary": "Download invoice PDF",
-        "tags": ["Invoices"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Invoice PDF bytes",
             "content": {
               "application/pdf": {
-                "schema": { "type": "string", "format": "binary" }
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
               }
             }
           },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/invoices/{id}/void": {
       "post": {
         "summary": "Void open invoice",
-        "tags": ["Invoices"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/invoices/{id}/retry": {
       "post": {
         "summary": "Retry failed invoice charge",
-        "tags": ["Invoices"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Invoices"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/webhook-endpoints": {
       "get": {
         "summary": "List outbound webhook endpoints",
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       },
       "post": {
         "summary": "Create webhook endpoint",
-        "tags": ["Webhooks"],
+        "tags": [
+          "Webhooks"
+        ],
         "responses": {
-          "201": { "$ref": "#/components/responses/Created" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       }
     },
     "/webhook-endpoints/{id}": {
       "get": {
         "summary": "Get webhook endpoint",
-        "tags": ["Webhooks"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Webhooks"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       },
       "put": {
         "summary": "Update webhook endpoint",
-        "tags": ["Webhooks"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Webhooks"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       },
       "delete": {
         "summary": "Delete webhook endpoint",
-        "tags": ["Webhooks"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Webhooks"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/webhook-endpoints/{id}/deliveries": {
       "get": {
         "summary": "List webhook delivery attempts",
-        "tags": ["Webhooks"],
-        "parameters": [{ "$ref": "#/components/parameters/ResourceID" }],
+        "tags": [
+          "Webhooks"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ResourceID"
+          }
+        ],
         "responses": {
-          "200": { "$ref": "#/components/responses/Ok" },
-          "401": { "$ref": "#/components/responses/Unauthorized" },
-          "404": { "$ref": "#/components/responses/NotFound" }
+          "200": {
+            "$ref": "#/components/responses/Ok"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
         }
       }
     },
     "/portal/token": {
       "post": {
         "summary": "Issue customer portal link token",
-        "tags": ["Portal"],
+        "tags": [
+          "Portal"
+        ],
         "responses": {
-          "201": { "$ref": "#/components/responses/Created" },
-          "400": { "$ref": "#/components/responses/BadRequest" },
-          "401": { "$ref": "#/components/responses/Unauthorized" }
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
         }
       }
     }
   },
   "tags": [
-    { "name": "Plans", "description": "Subscription plan catalog" },
-    { "name": "Customers", "description": "End-customer records" },
-    { "name": "Payment Methods", "description": "Tokenized Nomba cards" },
-    { "name": "Subscriptions", "description": "Billing subscriptions and checkout" },
-    { "name": "Invoices", "description": "Billing invoices" },
-    { "name": "Webhooks", "description": "Outbound event delivery configuration" },
-    { "name": "Portal", "description": "Customer self-service links" }
+    {
+      "name": "Plans",
+      "description": "Subscription plan catalog"
+    },
+    {
+      "name": "Customers",
+      "description": "End-customer records"
+    },
+    {
+      "name": "Payment Methods",
+      "description": "Tokenized Nomba cards"
+    },
+    {
+      "name": "Subscriptions",
+      "description": "Billing subscriptions and checkout"
+    },
+    {
+      "name": "Invoices",
+      "description": "Billing invoices"
+    },
+    {
+      "name": "Webhooks",
+      "description": "Outbound event delivery configuration"
+    },
+    {
+      "name": "Portal",
+      "description": "Customer self-service links"
+    }
   ],
   "components": {
     "parameters": {
@@ -480,7 +942,10 @@
         "name": "id",
         "in": "path",
         "required": true,
-        "schema": { "type": "string", "format": "uuid" },
+        "schema": {
+          "type": "string",
+          "format": "uuid"
+        },
         "description": "Resource UUID"
       }
     },
@@ -489,7 +954,9 @@
         "description": "Success",
         "content": {
           "application/json": {
-            "schema": { "$ref": "#/components/schemas/Envelope" }
+            "schema": {
+              "$ref": "#/components/schemas/Envelope"
+            }
           }
         }
       },
@@ -497,7 +964,9 @@
         "description": "Created",
         "content": {
           "application/json": {
-            "schema": { "$ref": "#/components/schemas/Envelope" }
+            "schema": {
+              "$ref": "#/components/schemas/Envelope"
+            }
           }
         }
       },
@@ -505,7 +974,9 @@
         "description": "Invalid request",
         "content": {
           "application/json": {
-            "schema": { "$ref": "#/components/schemas/Envelope" }
+            "schema": {
+              "$ref": "#/components/schemas/Envelope"
+            }
           }
         }
       },
@@ -513,7 +984,9 @@
         "description": "Missing or invalid API key",
         "content": {
           "application/json": {
-            "schema": { "$ref": "#/components/schemas/Envelope" }
+            "schema": {
+              "$ref": "#/components/schemas/Envelope"
+            }
           }
         }
       },
@@ -521,7 +994,9 @@
         "description": "Resource not found",
         "content": {
           "application/json": {
-            "schema": { "$ref": "#/components/schemas/Envelope" }
+            "schema": {
+              "$ref": "#/components/schemas/Envelope"
+            }
           }
         }
       },
@@ -529,7 +1004,9 @@
         "description": "Conflict with current state",
         "content": {
           "application/json": {
-            "schema": { "$ref": "#/components/schemas/Envelope" }
+            "schema": {
+              "$ref": "#/components/schemas/Envelope"
+            }
           }
         }
       }
@@ -554,58 +1031,136 @@
       "Plan": {
         "type": "object",
         "properties": {
-          "id": { "type": "string", "format": "uuid" },
-          "amount": { "$ref": "#/components/schemas/MoneyMinorAmount" },
-          "amount_display": { "$ref": "#/components/schemas/MoneyDisplay" },
-          "currency": { "$ref": "#/components/schemas/CurrencyCode" },
-          "name": { "type": "string" },
-          "interval": { "type": "string", "enum": ["monthly", "annual", "custom"] }
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/MoneyMinorAmount"
+          },
+          "amount_display": {
+            "$ref": "#/components/schemas/MoneyDisplay"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "name": {
+            "type": "string"
+          },
+          "interval": {
+            "type": "string",
+            "enum": [
+              "monthly",
+              "annual",
+              "custom"
+            ]
+          }
         }
       },
       "CreatePlanRequest": {
         "type": "object",
-        "required": ["name", "amount", "interval"],
+        "required": [
+          "name",
+          "amount",
+          "interval"
+        ],
         "properties": {
-          "name": { "type": "string" },
-          "amount": { "$ref": "#/components/schemas/MoneyMinorAmount" },
-          "currency": { "$ref": "#/components/schemas/CurrencyCode" },
-          "interval": { "type": "string", "enum": ["monthly", "annual", "custom"] },
-          "trial_days": { "type": "integer" }
+          "name": {
+            "type": "string"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/MoneyMinorAmount"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "interval": {
+            "type": "string",
+            "enum": [
+              "monthly",
+              "annual",
+              "custom"
+            ]
+          },
+          "trial_days": {
+            "type": "integer"
+          }
         }
       },
       "Invoice": {
         "type": "object",
         "properties": {
-          "id": { "type": "string", "format": "uuid" },
-          "amount_due": { "$ref": "#/components/schemas/MoneyMinorAmount" },
-          "amount_due_display": { "$ref": "#/components/schemas/MoneyDisplay" },
-          "amount_paid": { "$ref": "#/components/schemas/MoneyMinorAmount" },
-          "amount_paid_display": { "$ref": "#/components/schemas/MoneyDisplay" },
-          "currency": { "$ref": "#/components/schemas/CurrencyCode" },
-          "status": { "type": "string" }
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amount_due": {
+            "$ref": "#/components/schemas/MoneyMinorAmount"
+          },
+          "amount_due_display": {
+            "$ref": "#/components/schemas/MoneyDisplay"
+          },
+          "amount_paid": {
+            "$ref": "#/components/schemas/MoneyMinorAmount"
+          },
+          "amount_paid_display": {
+            "$ref": "#/components/schemas/MoneyDisplay"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "status": {
+            "type": "string"
+          }
         }
       },
       "PlanStats": {
         "type": "object",
         "properties": {
-          "active_subscribers": { "type": "integer" },
-          "mrr_estimate": { "$ref": "#/components/schemas/MoneyMinorAmount" },
-          "mrr_estimate_display": { "$ref": "#/components/schemas/MoneyDisplay" },
-          "currency": { "$ref": "#/components/schemas/CurrencyCode" }
+          "active_subscribers": {
+            "type": "integer"
+          },
+          "mrr_estimate": {
+            "$ref": "#/components/schemas/MoneyMinorAmount"
+          },
+          "mrr_estimate_display": {
+            "$ref": "#/components/schemas/MoneyDisplay"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          }
         }
       },
       "ProrationPreview": {
         "type": "object",
         "properties": {
-          "credit_amount": { "$ref": "#/components/schemas/MoneyMinorAmount" },
-          "credit_amount_display": { "$ref": "#/components/schemas/MoneyDisplay" },
-          "debit_amount": { "$ref": "#/components/schemas/MoneyMinorAmount" },
-          "debit_amount_display": { "$ref": "#/components/schemas/MoneyDisplay" },
-          "net_amount": { "$ref": "#/components/schemas/MoneyMinorAmount" },
-          "net_amount_display": { "$ref": "#/components/schemas/MoneyDisplay" },
-          "currency": { "$ref": "#/components/schemas/CurrencyCode" },
-          "days_remaining": { "type": "integer" },
-          "total_days": { "type": "integer" }
+          "credit_amount": {
+            "$ref": "#/components/schemas/MoneyMinorAmount"
+          },
+          "credit_amount_display": {
+            "$ref": "#/components/schemas/MoneyDisplay"
+          },
+          "debit_amount": {
+            "$ref": "#/components/schemas/MoneyMinorAmount"
+          },
+          "debit_amount_display": {
+            "$ref": "#/components/schemas/MoneyDisplay"
+          },
+          "net_amount": {
+            "$ref": "#/components/schemas/MoneyMinorAmount"
+          },
+          "net_amount_display": {
+            "$ref": "#/components/schemas/MoneyDisplay"
+          },
+          "currency": {
+            "$ref": "#/components/schemas/CurrencyCode"
+          },
+          "days_remaining": {
+            "type": "integer"
+          },
+          "total_days": {
+            "type": "integer"
+          }
         }
       },
       "Envelope": {
@@ -615,17 +1170,29 @@
           "meta": {
             "type": "object",
             "properties": {
-              "request_id": { "type": "string" },
-              "page": { "type": "integer" },
-              "per_page": { "type": "integer" },
-              "total": { "type": "integer" }
+              "request_id": {
+                "type": "string"
+              },
+              "page": {
+                "type": "integer"
+              },
+              "per_page": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              }
             }
           },
           "error": {
             "type": "object",
             "properties": {
-              "code": { "type": "string" },
-              "message": { "type": "string" }
+              "code": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
             }
           }
         }
@@ -639,5 +1206,10 @@
       }
     }
   },
-  "security": [{ "apiKeyAuth": [] }]
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ],
+  "x-readme": {}
 }
